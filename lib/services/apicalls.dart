@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:flutter_feed/models/news_headlines_model/news_headlines_model.dart';
+import 'package:flutter_feed/screens/home_screen/screen_home.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ApiCalls {
-  Future<NewsHeadLinesModel> fetchNewsHeadlines();
+  Future<NewsHeadLinesModel> fetchNewsHeadlines({required NewsTypes type});
 }
 
 class NewsAppServer implements ApiCalls {
@@ -16,9 +17,17 @@ class NewsAppServer implements ApiCalls {
   factory NewsAppServer() => instance;
 
   @override
-  Future<NewsHeadLinesModel> fetchNewsHeadlines() async {
+  Future<NewsHeadLinesModel> fetchNewsHeadlines(
+      {required NewsTypes type}) async {
+    final newsType = {
+      NewsTypes.bbcnews: 'bbc-news',
+      NewsTypes.foxnews: 'fox-news',
+      NewsTypes.fortune: 'fortune',
+      NewsTypes.globo: 'globo',
+      NewsTypes.cnn: 'cnn'
+    };
     final uri = Uri.parse(
-        'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=$apiKey');
+        'https://newsapi.org/v2/top-headlines?sources=${newsType[type]}&apiKey=$apiKey');
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
