@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         home: const ScreenSplash(),
         routes: {
           'home-screen': (context) => const ScreenHome(),
-          'news-category-screen': (context) =>  ScreenNewsCategories()
+          'news-category-screen': (context) => ScreenNewsCategories()
         });
   }
 }
