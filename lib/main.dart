@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feed/screens/home_screen/screen_home.dart';
+import 'package:flutter_feed/screens/news_categories_screen/screen_news_categories.dart';
 import 'package:flutter_feed/screens/splash_screen/screen_splash.dart';
 
 void main() {
@@ -13,16 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter-Feed-App',
-      theme: ThemeData(
-       
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const ScreenSplash(),
-      routes: {'home-screen':(context) => const ScreenHome()}
-      
-    );
+        title: 'Flutter-Feed-App',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const ScreenSplash(),
+        routes: {
+          'home-screen': (context) => const ScreenHome(),
+          'news-category-screen': (context) =>  ScreenNewsCategories()
+        });
   }
 }
-

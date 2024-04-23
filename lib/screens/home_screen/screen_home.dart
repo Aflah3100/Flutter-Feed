@@ -17,7 +17,9 @@ class ScreenHome extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed('news-category-screen');
+          },
           icon: Image.asset(
             'assets/images/category_icon.png',
             width: 25.0,

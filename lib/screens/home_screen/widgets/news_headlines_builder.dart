@@ -7,6 +7,7 @@ import 'package:flutter_feed/models/news_headlines_model/news_headlines_model.da
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+
 class NewsHeadlinesBuilder extends StatelessWidget {
   const NewsHeadlinesBuilder({
     super.key,
@@ -26,10 +27,11 @@ class NewsHeadlinesBuilder extends StatelessWidget {
     return FutureBuilder<NewsHeadLinesModel>(
       future: NewsAppServer.instance
           .fetchNewsHeadlines(type: newsTypeNotifer.value),
-      builder:
-          (BuildContext context, AsyncSnapshot<NewsHeadLinesModel> snapshot) {
+      builder: (BuildContext context,
+          AsyncSnapshot<NewsHeadLinesModel> snapshot) {
         //Connection waiting
-        if (snapshot.connectionState == ConnectionState.waiting ||
+        if (snapshot.connectionState ==
+                ConnectionState.waiting ||
             !(snapshot.hasData)) {
           return const Center(
             child: SpinKitWanderingCubes(
@@ -58,6 +60,8 @@ class NewsHeadlinesBuilder extends StatelessWidget {
   }
 }
 
+
+// ignore: non_constant_identifier_names
 Widget _newsScrollItem(
   double height,
   double width,

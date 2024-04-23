@@ -1,15 +1,18 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_feed/models/news_headlines_model/news_headlines_model.dart';
 import 'package:flutter_feed/screens/home_screen/screen_home.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ApiCalls {
   Future<NewsHeadLinesModel> fetchNewsHeadlines({required NewsTypes type});
+  Future<NewsHeadLinesModel> fetchNewsHeadlinesByCategory(
+      {required String newsCategory});
 }
 
 class NewsAppServer implements ApiCalls {
   //apikey
-  static const apiKey = '18c25434594b4a79a2740151893f6d85';
+  static const apiKey = '802bac35ebcf4d8c895455de0c883429';
 
   // Single-ton-object
   NewsAppServer._internal();
@@ -36,5 +39,20 @@ class NewsAppServer implements ApiCalls {
     }
 
     throw Exception('Error Fetching News Headlines');
+  }
+
+  @override
+  Future<NewsHeadLinesModel> fetchNewsHeadlinesByCategory(
+      {required String newsCategory}) async {
+    final uri = Uri.parse(
+        'https://newsapi.org/v2/top-headlines?q=$newsCategory&apiKey=$apiKey');
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      return NewsHeadLinesModel.fromJson(jsonResponse);
+    }
+
+    throw Exception('Error Fetching $Category news');
   }
 }
