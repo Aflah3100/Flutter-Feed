@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feed/models/news_headlines_model/news_headlines_model.dart';
-import 'package:flutter_feed/screens/news_categories_screen/widgets/news_category_list.dart';
+import 'package:flutter_feed/screens/news_categories_screen/widgets/news_list.dart';
 import 'package:flutter_feed/screens/news_categories_screen/widgets/news_category_scroll.dart';
 import 'package:flutter_feed/services/apicalls.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -76,7 +76,7 @@ class ScreenNewsCategories extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return buildCategoryNewsList(context, snapshot.data!);
+                    return buildNewsList(context, snapshot.data!);
                   }
                 },
               );

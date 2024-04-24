@@ -7,7 +7,6 @@ import 'package:flutter_feed/models/news_headlines_model/news_headlines_model.da
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-
 class NewsHeadlinesBuilder extends StatelessWidget {
   const NewsHeadlinesBuilder({
     super.key,
@@ -27,39 +26,35 @@ class NewsHeadlinesBuilder extends StatelessWidget {
     return FutureBuilder<NewsHeadLinesModel>(
       future: NewsAppServer.instance
           .fetchNewsHeadlines(type: newsTypeNotifer.value),
-      builder: (BuildContext context,
-          AsyncSnapshot<NewsHeadLinesModel> snapshot) {
-        //Connection waiting
-        if (snapshot.connectionState ==
-                ConnectionState.waiting ||
-            !(snapshot.hasData)) {
+      builder:
+          (BuildContext context, AsyncSnapshot<NewsHeadLinesModel> snapshot) {
+        // Connection waiting
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            !snapshot.hasData) {
           return const Center(
             child: SpinKitWanderingCubes(
               color: Colors.blue,
             ),
           );
         } else {
-          //News-Scroll-Widget
-          return Center(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return _newsScrollItem(
-                  height,
-                  width,
-                  snapshot.data!.articles![index],
-                  dateFormat,
-                );
-              },
-              itemCount: snapshot.data!.articles!.length,
-            ),
+          // News-Scroll-Widget
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              return _newsScrollItem(
+                height,
+                width,
+                snapshot.data!.articles![index],
+                dateFormat,
+              );
+            },
+            itemCount: snapshot.data!.articles!.length,
           );
         }
       },
     );
   }
 }
-
 
 // ignore: non_constant_identifier_names
 Widget _newsScrollItem(

@@ -6,8 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-Widget buildCategoryNewsList(
-    BuildContext context, NewsHeadLinesModel snapshotData) {
+Widget buildNewsList(BuildContext context, NewsHeadLinesModel snapshotData) {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
 
@@ -30,7 +29,7 @@ Widget buildCategoryNewsList(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: CachedNetworkImage(
-                    imageUrl: currentArticle.urlToImage.toString(),
+                    imageUrl: currentArticle.urlToImage ?? '',
                     fit: BoxFit.cover,
                     placeholder: (BuildContext context, String url) =>
                         const SpinKitCircle(
@@ -38,7 +37,10 @@ Widget buildCategoryNewsList(
                       size: 20.0,
                     ),
                     errorWidget: (BuildContext context, String url, Object _) =>
-                        const Icon(Icons.error),
+                        Image.asset(
+                      'assets/images/news_cover_image.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -75,7 +77,9 @@ Widget buildCategoryNewsList(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentArticle.source!.id!,
+                          (currentArticle.source!.id != null)
+                              ? currentArticle.source!.id!
+                              : 'News',
                           style: GoogleFonts.poppins(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,

@@ -8,6 +8,7 @@ abstract class ApiCalls {
   Future<NewsHeadLinesModel> fetchNewsHeadlines({required NewsTypes type});
   Future<NewsHeadLinesModel> fetchNewsHeadlinesByCategory(
       {required String newsCategory});
+  Future<NewsHeadLinesModel> fetchTopHeadlines();
 }
 
 class NewsAppServer implements ApiCalls {
@@ -54,5 +55,20 @@ class NewsAppServer implements ApiCalls {
     }
 
     throw Exception('Error Fetching $Category news');
+  }
+
+  @override
+  Future<NewsHeadLinesModel> fetchTopHeadlines() async {
+
+    final uri=Uri.parse('https://newsapi.org/v2/top-headlines?country=us&apiKey=$apiKey');
+    
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      return NewsHeadLinesModel.fromJson(jsonResponse);
+    }
+
+    throw Exception('Error Fetching Top Headlines');
   }
 }

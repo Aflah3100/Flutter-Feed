@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feed/screens/home_screen/widgets/news_headlines_builder.dart';
+import 'package:flutter_feed/screens/home_screen/widgets/top_headlines_builder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum NewsTypes { bbcnews, foxnews, fortune, globo, cnn }
@@ -59,10 +60,10 @@ class ScreenHome extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            //Top-News-Headlines-Container-Widget
             SizedBox(
                 width: width,
                 height: height * 0.50,
+                //News-Headlines-Widget
                 child: ValueListenableBuilder(
                     valueListenable: newsTypeNotifer,
                     builder: (BuildContext ctx, NewsTypes newNewsType, widget) {
@@ -71,7 +72,9 @@ class ScreenHome extends StatelessWidget {
                           height: height,
                           width: width,
                           dateFormat: dateFormat);
-                    }))
+                    })),
+            // Top-News-Headlines-Widget
+            const TopHeadlinesBuilder()
           ],
         ),
       ),
