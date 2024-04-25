@@ -20,13 +20,14 @@ Widget buildNewsList(BuildContext context, NewsHeadLinesModel snapshotData) {
         return Padding(
           padding: EdgeInsets.only(top: height * .02),
           child: GestureDetector(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScreenNewsDisplay(
-                source: currentArticle.source!.name,
-                headline: currentArticle.title!,
-                date: currentArticle.publishedAt!,
-                description: currentArticle.description!,
-                imageUrl: currentArticle.urlToImage,
-                content: currentArticle.content))),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ScreenNewsDisplay(
+                    source: (currentArticle.source!.name) ?? 'Top News',
+                    headline: (currentArticle.title) ?? '',
+                    date: (currentArticle.publishedAt) ?? '',
+                    description: currentArticle.description ?? ' ',
+                    imageUrl: currentArticle.urlToImage,
+                    content: (currentArticle.content) ?? ''))),
 
             //News-Row-Widget
             child: Row(
@@ -39,21 +40,26 @@ Widget buildNewsList(BuildContext context, NewsHeadLinesModel snapshotData) {
                   color: Colors.white,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
-                    child: CachedNetworkImage(
-                      imageUrl: currentArticle.urlToImage.toString(),
-                      fit: BoxFit.cover,
-                      placeholder: (BuildContext context, String url) =>
-                          const SpinKitCircle(
-                        color: Colors.blue,
-                        size: 20.0,
-                      ),
-                      errorWidget:
-                          (BuildContext context, String url, Object _) =>
-                              Image.asset(
-                        'assets/images/news_cover_image.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    child: (currentArticle.urlToImage != null)
+                        ? CachedNetworkImage(
+                            imageUrl: currentArticle.urlToImage.toString(),
+                            fit: BoxFit.cover,
+                            placeholder: (BuildContext context, String url) =>
+                                const SpinKitCircle(
+                              color: Colors.blue,
+                              size: 20.0,
+                            ),
+                            errorWidget:
+                                (BuildContext context, String url, Object _) =>
+                                    Image.asset(
+                              'assets/images/news_cover_image.png',
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Image.asset(
+                            'assets/images/news_cover_image.png',
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
 
@@ -78,7 +84,7 @@ Widget buildNewsList(BuildContext context, NewsHeadLinesModel snapshotData) {
                       Text(
                         currentArticle.title!,
                         maxLines: 4,
-                        overflow: TextOverflow.visible,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -88,14 +94,15 @@ Widget buildNewsList(BuildContext context, NewsHeadLinesModel snapshotData) {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            (currentArticle.source!.id != null)
-                                ? currentArticle.source!.id!
-                                : 'News',
-                            style: GoogleFonts.poppins(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.redAccent,
+                          Flexible(
+                            child: Text(
+                              currentArticle.source!.id ?? 'News',
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.poppins(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.redAccent,
+                              ),
                             ),
                           ),
                           Text(

@@ -8,12 +8,12 @@ import 'package:intl/intl.dart';
 class ScreenNewsDisplay extends StatelessWidget {
   //News Variables
 
-  String? source;
+  String source;
   String headline;
   String date;
   String description;
   String? imageUrl;
-  String? content;
+  String content;
   static const dateFormat = 'dd MMMM, yyyy';
 
   ScreenNewsDisplay(
@@ -32,7 +32,7 @@ class ScreenNewsDisplay extends StatelessWidget {
     final dateTime = DateTime.parse(date);
     return Scaffold(
       appBar: AppBar(
-        title: Text((source == null) ? 'Top News ' : source!,
+        title: Text(source,
             style: GoogleFonts.poppins(
               fontSize: 25.0,
               fontWeight: FontWeight.bold,
@@ -45,13 +45,29 @@ class ScreenNewsDisplay extends StatelessWidget {
             //News image
             ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl.toString(),
-                fit: BoxFit.fill,
-                height: height * .50,
-                width: width,
-              ),
+              child: imageUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: imageUrl!,
+                      fit: BoxFit.fill,
+                      height: height * .50,
+                      width: width,
+                      errorWidget:
+                          (BuildContext context, String url, Object _) =>
+                              Image.asset(
+                        'assets/images/news_cover_image.png',
+                        fit: BoxFit.fill,
+                        height: height * 0.5,
+                        width: width,
+                      ),
+                    )
+                  : Image.asset(
+                      'assets/images/news_cover_image.png',
+                      fit: BoxFit.fill,
+                      height: height * .50,
+                      width: width,
+                    ),
             ),
+
             //News Title Container
             Card(
               elevation: 4.0,
@@ -85,7 +101,7 @@ class ScreenNewsDisplay extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          source ?? 'Latest-News',
+                          source ,
                           style: GoogleFonts.poppins(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
@@ -104,18 +120,18 @@ class ScreenNewsDisplay extends StatelessWidget {
                     ),
                     //News Description
                     Text(description,
-                        style: GoogleFonts.rubik(
+                        style: GoogleFonts.nunitoSans(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         )),
                     SizedBox(
                       height: height * .01,
                     ),
                     //News-Content
-                    Text(content ?? ' ',
-                        style: GoogleFonts.rubik(
+                    Text(content ,
+                        style: GoogleFonts.nunitoSans(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ))
                   ],
                 ),

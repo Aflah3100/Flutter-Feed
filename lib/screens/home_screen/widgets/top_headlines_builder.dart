@@ -14,7 +14,7 @@ class TopHeadlinesBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           //Connection-Waiting
           if (snapshot.connectionState == ConnectionState.waiting ||
-              !(snapshot.hasData)) {
+              !(snapshot.hasData) || snapshot.data!.articles!.isEmpty) {
             return const Center(
               child: SpinKitWanderingCubes(
                 color: Colors.blue,

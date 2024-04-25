@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_feed/screens/home_screen/screen_home.dart';
 import 'package:flutter_feed/screens/news_display_screen/screen_news_display.dart';
 import 'package:flutter_feed/services/apicalls.dart';
@@ -61,12 +62,12 @@ Widget _newsScrollItem(double height, double width, Articles article,
   return GestureDetector(
     onTap: () => Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => ScreenNewsDisplay(
-            source: article.source!.name,
+            source: article.source!.name!,
             headline: article.title!,
             date: article.publishedAt!,
             description: article.description!,
             imageUrl: article.urlToImage,
-            content: article.content))),
+            content: article.content!))),
     child: Stack(
       children: [
         //News-Image-Widget
@@ -132,15 +133,17 @@ Widget _newsScrollItem(double height, double width, Articles article,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            (article.author != null)
-                                ? article.author!
-                                : ('Unknown'),
-                            style: GoogleFonts.poppins(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.redAccent,
-                            )),
+                        //News-Author
+                        Flexible(
+                          child: Text(
+                              article.author?? 'Unknown',
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.poppins(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.redAccent,
+                              )),
+                        ),
                         //News-Date-Time
                         Text(
                           DateFormat(dateFormat).format(dateTime),
