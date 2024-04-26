@@ -39,6 +39,6 @@ Flutter-Feed is a news app built using Flutter that allows users to browse and r
     ```
 ## Screenshots
 ![Screenshot 1](screenshots/img-1.jpeg)
-![Screenshot 2](screenshots/img-2.jpeg)
+![Screenshot 2](screenshots/img-2.png)
 ![Screenshot 3](screenshots/img-3.jpeg)
 ![Screenshot 4](screenshots/img-4.jpeg)
