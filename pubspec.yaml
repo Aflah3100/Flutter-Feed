@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
+  
   flutter_spinkit: ^5.2.1
   google_fonts: ^6.2.1
   http: ^1.2.1
@@ -39,8 +40,21 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^3.0.0
+  flutter_native_splash: ^2.4.0
   flutter_test:
     sdk: flutter
+  
+flutter_native_splash:
+  android: true
+  ios: true
+  web: true
+  image: assets/images/splash_pic.jpg
+  color: "#FFFFFF"
+
+
+  
+  
+ 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -50,6 +64,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  
+ 
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/category_icon.png

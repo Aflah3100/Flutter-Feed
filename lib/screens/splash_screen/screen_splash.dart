@@ -10,16 +10,14 @@ class ScreenSplash extends StatefulWidget {
 }
 
 class _ScreenSplashState extends State<ScreenSplash> {
-
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5),(){
-     
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).popAndPushNamed('home-screen');
-
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * 1;
